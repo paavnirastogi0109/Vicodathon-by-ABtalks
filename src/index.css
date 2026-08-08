@@ -1,0 +1,148 @@
+/* =========================================================
+   Adaptive Interview Intelligence — Design Tokens
+   Signature motif: the "branch" — every interview is a
+   decision tree that reroutes on each answer. Nodes, thin
+   connecting paths, and one live (amber) path vs. dormant
+   (graphite) paths recur across the product.
+   ========================================================= */
+
+:root {
+  /* Color */
+  --ink-950: #0a0d12;
+  --ink-900: #0d1117;
+  --ink-850: #11161d;
+  --surface: #151b23;
+  --surface-raised: #1a212b;
+  --border: #262e3a;
+  --border-soft: #1d2530;
+
+  --text-primary: #edeff2;
+  --text-secondary: #aab2c0;
+  --text-muted: #6b7383;
+
+  --amber: #f2a94e;
+  --amber-dim: #a9752f;
+  --amber-wash: rgba(242, 169, 78, 0.1);
+
+  --teal: #4fd1c5;
+  --teal-wash: rgba(79, 209, 197, 0.1);
+
+  --danger: #e2685f;
+  --success: #4fd1c5;
+
+  /* Type */
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  /* Layout */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --container: 1120px;
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 12px 28px -18px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--ink-900);
+  background-image: radial-gradient(circle at 12% 0%, rgba(242, 169, 78, 0.06), transparent 45%),
+    radial-gradient(circle at 88% 8%, rgba(79, 209, 197, 0.05), transparent 40%);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Utility */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 3px var(--amber-wash);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+::selection {
+  background: var(--amber-wash);
+  color: var(--text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+}

@@ -1,0 +1,10 @@
+.topic-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--teal);
+  background: var(--teal-wash);
+  white-space: nowrap;
+}

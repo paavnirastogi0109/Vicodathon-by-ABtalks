@@ -1,0 +1,38 @@
+.question-card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: var(--shadow-card);
+}
+
+.question-card__badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.question-card__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.question-card__prompt {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .question-card {
+    padding: 24px;
+  }
+  .question-card__prompt {
+    font-size: 1.2rem;
+  }
+}

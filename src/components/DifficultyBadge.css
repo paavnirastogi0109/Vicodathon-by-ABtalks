@@ -1,0 +1,44 @@
+.difficulty-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  background: var(--surface-raised);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.difficulty-badge__bars {
+  display: inline-flex;
+  gap: 2px;
+  align-items: flex-end;
+}
+
+.difficulty-badge__bars span {
+  width: 3px;
+  border-radius: 1px;
+  background: var(--border);
+  display: inline-block;
+}
+
+.difficulty-badge__bars span:nth-child(1) {
+  height: 6px;
+}
+.difficulty-badge__bars span:nth-child(2) {
+  height: 9px;
+}
+.difficulty-badge__bars span:nth-child(3) {
+  height: 12px;
+}
+
+.difficulty-badge__bars span.is-filled {
+  background: var(--amber);
+}
+
+.difficulty-badge--hard {
+  color: var(--danger);
+}

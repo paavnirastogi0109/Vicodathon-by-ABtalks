@@ -1,0 +1,53 @@
+.branch-diagram {
+  width: 100%;
+  height: auto;
+  max-width: 460px;
+}
+
+.bd-line {
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.bd-line--dim {
+  stroke: var(--border);
+}
+
+.bd-line--live {
+  stroke: var(--amber);
+  stroke-width: 2;
+}
+
+.bd-node--dim {
+  fill: var(--ink-900);
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.bd-node--start {
+  fill: var(--teal);
+}
+
+.bd-node--live {
+  fill: var(--amber);
+}
+
+.bd-node--pulse {
+  animation: bd-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes bd-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(242, 169, 78, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(242, 169, 78, 0.55));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bd-node--pulse {
+    animation: none;
+  }
+}

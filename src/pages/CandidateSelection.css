@@ -1,0 +1,26 @@
+.candidates {
+  padding-top: 56px;
+  padding-bottom: 72px;
+}
+
+.candidates__header {
+  max-width: 620px;
+  margin-bottom: 44px;
+}
+
+.candidates__title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-top: 16px;
+  color: var(--text-primary);
+}
+
+.candidates__subtitle {
+  margin-top: 14px;
+  font-size: 1rem;
+}
+
+.candidates__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
