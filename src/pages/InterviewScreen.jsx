@@ -1,20 +1,61 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar.jsx'
 import ProgressBar from '../components/ProgressBar.jsx'
 import QuestionCard from '../components/QuestionCard.jsx'
 import Button from '../components/Button.jsx'
-import { candidates } from '../data/candidates.js'
+import { fetchCandidateById } from '../data/candidatesApi.js'
+import { getInitials, formatYearsExperience } from '../data/candidateFormat.js'
 import { mockQuestions } from '../data/interviewMock.js'
 import './InterviewScreen.css'
 
 export default function InterviewScreen() {
   const { candidateId } = useParams()
   const navigate = useNavigate()
-  const candidate = candidates.find((c) => c.id === candidateId) ?? candidates[0]
+
+  const [candidate, setCandidate] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [notFound, setNotFound] = useState(false)
+  const [loadError, setLoadError] = useState(null)
 
   const [questionIndex, setQuestionIndex] = useState(0)
   const [answer, setAnswer] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function loadCandidate() {
+      setLoading(true)
+      setNotFound(false)
+      setLoadError(null)
+      setCandidate(null)
+
+      try {
+        const record = await fetchCandidateById(candidateId)
+        if (cancelled) return
+
+        if (!record) {
+          setNotFound(true)
+        } else {
+          setCandidate(record)
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setLoadError(err instanceof Error ? err.message : 'Failed to load candidate')
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false)
+        }
+      }
+    }
+
+    loadCandidate()
+
+    return () => {
+      cancelled = true
+    }
+  }, [candidateId])
 
   const totalQuestions = mockQuestions.length
   const currentQuestion = mockQuestions[questionIndex]
@@ -30,21 +71,86 @@ export default function InterviewScreen() {
     setAnswer('')
   }
 
+  if (loading) {
+    return (
+      <div className="page">
+        <Navbar />
+        <main className="container interview">
+          <p className="interview__status-message">Loading candidate…</p>
+        </main>
+      </div>
+    )
+  }
+
+  if (loadError) {
+    return (
+      <div className="page">
+        <Navbar />
+        <main className="container interview">
+          <div className="interview__error">
+            <p className="interview__error-message" role="alert">
+              {loadError}
+            </p>
+            <Button variant="primary" size="md" onClick={() => navigate('/candidates')}>
+              Back to candidates
+            </Button>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  if (notFound) {
+    return (
+      <div className="page">
+        <Navbar />
+        <main className="container interview">
+          <div className="interview__error">
+            <p className="interview__error-message" role="alert">
+              Candidate not found. The ID &ldquo;{candidateId}&rdquo; does not match any record.
+            </p>
+            <Button variant="primary" size="md" onClick={() => navigate('/candidates')}>
+              Back to candidates
+            </Button>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  const { name, jobRole, yearsExperience, education, status } = candidate.member
+  const initials = getInitials(name)
+
   return (
     <div className="page">
       <Navbar
         rightSlot={
           <div className="interview__candidate-pill">
-            <span className="interview__candidate-avatar">{candidate.initials}</span>
+            <span className="interview__candidate-avatar">{initials}</span>
             <div>
-              <p className="interview__candidate-name">{candidate.name}</p>
-              <p className="interview__candidate-role">{candidate.role}</p>
+              <p className="interview__candidate-name">{name}</p>
+              <p className="interview__candidate-role">{jobRole}</p>
             </div>
           </div>
         }
       />
 
       <main className="container interview">
+        <dl className="interview__candidate-meta">
+          <div>
+            <dt>Experience</dt>
+            <dd>{formatYearsExperience(yearsExperience)}</dd>
+          </div>
+          <div>
+            <dt>Education</dt>
+            <dd>{education}</dd>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd>{status}</dd>
+          </div>
+        </dl>
+
         <div className="interview__progress-row">
           <ProgressBar current={questionIndex + 1} total={totalQuestions} />
         </div>

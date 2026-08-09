@@ -7,6 +7,57 @@
   gap: 24px;
 }
 
+.interview__status-message {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.interview__error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 8px;
+}
+
+.interview__error-message {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+.interview__candidate-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px 24px;
+  margin: 0;
+  padding: 18px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.interview__candidate-meta div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.interview__candidate-meta dt {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.interview__candidate-meta dd {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
 .interview__progress-row {
   margin-bottom: 4px;
 }

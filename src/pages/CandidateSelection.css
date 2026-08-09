@@ -19,6 +19,16 @@
   font-size: 1rem;
 }
 
+.candidates__status {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.candidates__status--error {
+  color: var(--danger);
+}
+
 .candidates__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
