@@ -1,7 +1,7 @@
 // Client for the FastAPI adaptive interview backend.
 // Talks to the single endpoint defined in technical-spec.md: POST /api/interview
 
-const INTERVIEW_API_URL = 'http://127.0.0.1:8000/api/interview'
+const INTERVIEW_API_URL = 'https://the-adaptive-interview-agent.onrender.com/api/interview'
 
 async function postInterview(payload) {
   let response
@@ -15,7 +15,7 @@ async function postInterview(payload) {
   } catch (err) {
     // Network-level failure — most commonly the backend isn't running.
     throw new Error(
-      'Could not reach the interview backend at http://127.0.0.1:8000. ' +
+      'Could not reach the interview backend at https://the-adaptive-interview-agent.onrender.com ' +
         'Make sure the FastAPI server is running (uvicorn main:app --reload).'
     )
   }
